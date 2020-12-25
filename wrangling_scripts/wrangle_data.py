@@ -17,10 +17,10 @@ def return_figures():
 
     """
     #specifying format, lines and timeframe
-    payload = {'format': 'json', 'per_page': '50', 'date':'2010:2020'}
+    payload = {'format': 'json','per_page': '1000', 'date':'1990:2020'}
 
     #url from where to pick up API data
-    r_payload = requests.get('http://api.worldbank.org/v2/country/br/indicator/SP.POP.TOTL.', params=payload)
+    r_payload = requests.get('http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/SP.POP.TOTL.', params=payload)
 
     # put the results in a dictionary where each country contains a list of all the x values and all the y values
     # this will make it easier to plot the results
@@ -55,9 +55,9 @@ def return_figures():
         )
 
     #create layout one for graph_one
-    layout_one = dict(title = 'Total Population <br> per Person 2010 to 2019',
+    layout_one = dict(title = 'Total Population <br> per Person 1990 to 2019',
                       xaxis = dict(title = 'Year',
-                      autotick=False, tick0=1990, dtick=25),
+                      autotick=False, tick0=1990, dtick=5),
                       yaxis = dict(title = 'Total Population'),
                       )
 
