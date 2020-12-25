@@ -60,7 +60,7 @@ def return_figures():
     #create layout one for graph_one
     layout_one = dict(title = 'Total Population <br> per Person 1990 to 2019',
                       xaxis = dict(title = 'Year',
-                      autotick=False, tick0=1990, dtick=3),
+                      autotick=False, tick0=1990, dtick=4),
                       yaxis = dict(title = 'Total Population'),
                       )
 
@@ -88,10 +88,10 @@ def return_figures():
     for country in data:
         country_list.append(country)
 
-    #create list for graph_one
+    #create list for graph_two
     graph_two = []
 
-    #create graph one scatter plot
+    #create graph two scatter plot
     for country in data:
         graph_two.append(
             go.Scatter(
@@ -102,10 +102,10 @@ def return_figures():
             )
         )
 
-    #create layout one for graph_one
+    #create layout one for graph_two
     layout_two = dict(title = 'CO2 emission <br> per Year 1990 to 2017',
                        xaxis = dict(title = 'Year',
-                        autotick=False, tick0=1990, dtick=3),
+                        autotick=False, tick0=1990, dtick=4),
                         yaxis = dict(title = 'CO2 emission'),
                         )
 
@@ -132,10 +132,10 @@ def return_figures():
     for country in data:
         country_list.append(country)
 
-    #create list for graph_one
+    #create list for graph_three
     graph_three = []
 
-    #create graph one scatter plot
+    #create graph three scatter plot
     for country in data:
         graph_three.append(
             go.Scatter(
@@ -146,19 +146,63 @@ def return_figures():
             )
         )
 
-    #create layout one for graph_one
-    layout_three = dict(title = 'Forest area <br> Percent of Land Area 1990 to 2017',
+    #create layout one for graph_three
+    layout_three = dict(title = 'Forest area <br> Percent of Total Land Area 1990 to 2017',
                        xaxis = dict(title = 'Year',
-                        autotick=False, tick0=1990, dtick=3),
+                        autotick=False, tick0=1990, dtick=4),
                         yaxis = dict(title = 'forest area'),
-                        )   
+                        )
+
+
+     #for plot 4
+    payload = {'format': 'json','per_page': '1000', 'date':'1990:2015'}
+
+    r_payload = requests.get('http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/EG.ELC.RNEW.ZS.', params=payload)
+
+    # put the results in a dictionary where each country contains a list of all the x values and all the y values
+    # this will make it easier to plot the results
+    data = defaultdict(list)
+
+    for entry in r_payload.json()[1]:
+        # check if country is already in dictionary. If so, append the new x and y values to the lists
+        if data[entry['country']['value']]:
+            data[entry['country']['value']][0].append(int(entry['date']))
+            data[entry['country']['value']][1].append(float(entry['value']))       
+        else: # if country not in dictionary, then initialize the lists that will hold the x and y values
+            data[entry['country']['value']] = [[],[]] 
+    
+    #create country list to use
+    country_list = []
+    for country in data:
+        country_list.append(country)
+
+    #create list for graph_four
+    graph_four = []
+
+    #create graph four scatter plot
+    for country in data:
+        graph_four.append(
+            go.Scatter(
+                x = data[country][0],
+                y = data[country][1],
+                mode = 'lines',
+                name = country
+            )
+        )
+
+    #create layout one for graph_four
+    layout_four = dict(title = 'Renewable Energy Output <br> Percent of Total Energy 1990 to 2017',
+                       xaxis = dict(title = 'Year',
+                        autotick=False, tick0=1990, dtick=4),
+                        yaxis = dict(title = 'renewable energy'),
+                        )  
     
     
- 
     # append all charts to the figures list
     figures = []
     figures.append(dict(data=graph_one, layout=layout_one))
     figures.append(dict(data=graph_two, layout=layout_two))
     figures.append(dict(data=graph_three, layout=layout_three))
+    figures.append(dict(data=graph_four, layout=layout_four))
 
     return figures
