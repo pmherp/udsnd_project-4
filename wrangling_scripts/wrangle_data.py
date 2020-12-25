@@ -1,11 +1,13 @@
-import pandas as pd
+#import relevant library for getting API data
+import requests
 import plotly.graph_objs as go
+from collections import defaultdict
 
 # Use this file to read in your data and prepare the plotly visualizations. The path to the data files are in
 # `data/file_name.csv`
 
 def return_figures():
-    """Creates four plotly visualizations
+    """ Connects to the World Bank API, Cleans the Data and Creates plotly visualizations
 
     Args:
         None
@@ -14,76 +16,55 @@ def return_figures():
         list (dict): list containing the four plotly visualizations
 
     """
+    #specifying format, lines and timeframe
+    payload = {'format': 'json', 'per_page': '50', 'date':'2010:2020'}
 
-    # first chart plots arable land from 1990 to 2015 in top 10 economies 
-    # as a line chart
+    #url from where to pick up API data
+    r_payload = requests.get('http://api.worldbank.org/v2/country/br/indicator/SP.POP.TOTL.', params=payload)
+
+    # put the results in a dictionary where each country contains a list of all the x values and all the y values
+    # this will make it easier to plot the results
     
-    graph_one = []    
-    graph_one.append(
-      go.Scatter(
-      x = [0, 1, 2, 3, 4, 5],
-      y = [0, 2, 4, 6, 8, 10],
-      mode = 'lines'
-      )
-    )
+    data = defaultdict(list)
 
-    layout_one = dict(title = 'Chart One',
-                xaxis = dict(title = 'x-axis label'),
-                yaxis = dict(title = 'y-axis label'),
-                )
-
-# second chart plots ararble land for 2015 as a bar chart    
-    graph_two = []
-
-    graph_two.append(
-      go.Bar(
-      x = ['a', 'b', 'c', 'd', 'e'],
-      y = [12, 9, 7, 5, 1],
-      )
-    )
-
-    layout_two = dict(title = 'Chart Two',
-                xaxis = dict(title = 'x-axis label',),
-                yaxis = dict(title = 'y-axis label'),
-                )
-
-
-# third chart plots percent of population that is rural from 1990 to 2015
-    graph_three = []
-    graph_three.append(
-      go.Scatter(
-      x = [5, 4, 3, 2, 1, 0],
-      y = [0, 2, 4, 6, 8, 10],
-      mode = 'lines'
-      )
-    )
-
-    layout_three = dict(title = 'Chart Three',
-                xaxis = dict(title = 'x-axis label'),
-                yaxis = dict(title = 'y-axis label')
-                       )
+    for entry in r_payload.json()[1]:
+        # check if country is already in dictionary. If so, append the new x and y values to the lists
+        if data[entry['country']['value']]:
+            data[entry['country']['value']][0].append(int(entry['date']))
+            data[entry['country']['value']][1].append(float(entry['value']))       
+        else: # if country not in dictionary, then initialize the lists that will hold the x and y values
+            data[entry['country']['value']] = [[],[]] 
     
-# fourth chart shows rural population vs arable land
-    graph_four = []
-    
-    graph_four.append(
-      go.Scatter(
-      x = [20, 40, 60, 80],
-      y = [10, 20, 30, 40],
-      mode = 'markers'
-      )
-    )
+    #create country list to use
+    country_list = []
+    for country in data:
+        country_list.append(country)
 
-    layout_four = dict(title = 'Chart Four',
-                xaxis = dict(title = 'x-axis label'),
-                yaxis = dict(title = 'y-axis label'),
-                )
-    
+    #create list for graph_one
+    graph_one = []
+
+    #create graph one scatter plot
+    for country in data:
+        graph_one.append(
+            go.Scatter(
+                x = data[country][0],
+                y = data[country][1],
+                mode = 'lines',
+                name = country
+            )
+        )
+
+    #create layout one for graph_one
+    layout_one = dict(title = 'Total Population <br> per Person 2010 to 2019',
+                      xaxis = dict(title = 'Year',
+                      autotick=False, tick0=1990, dtick=25),
+                      yaxis = dict(title = 'Total Population'),
+                      )
+
+
     # append all charts to the figures list
     figures = []
     figures.append(dict(data=graph_one, layout=layout_one))
-    figures.append(dict(data=graph_two, layout=layout_two))
-    figures.append(dict(data=graph_three, layout=layout_three))
-    figures.append(dict(data=graph_four, layout=layout_four))
+    
 
     return figures
