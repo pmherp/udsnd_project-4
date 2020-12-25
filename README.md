@@ -4,21 +4,19 @@ __(project is ongoing)__
 The code should run with no issues using Python versions 3.*.
 
 Used extensions/frameworks:
-- pandas for data wrangling
 - plotly for python vizualisations
 - flask for back-end of web-app
 - bootstrap for front-end of web-app
 - requests for handling API connection
 
 ## Project Motivation
-For this project, I was using World Bank Data to showcase how to connect to an API and deploy a data web-app to share key results with anyone on the web:
+For this project, I was using World Bank Data to showcase how to connect to an API and deploy a data web-app to share key results with anyone on the web.
 
 ## File Descriptions
 - myapp.py: basic routing information
-- folder data: holds data-files after wrangling
 - folder static: holds images used in the web-app
 - index.html: holdes basic html of the web-app front-end
-- \__init__.py: initializes flask from myapp with the specified routes
+- \__init__.py: initializes flask from "myapp" with the specified routes
 - routes.py: specifies the url and connects back-end with front-end
 - wrangle_data.py: code responsible for cleaning data and making plots for web-app
 
