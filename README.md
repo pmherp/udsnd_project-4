@@ -22,7 +22,7 @@ For this project, I was using World Bank Data to showcase how to connect to an A
 - a virtual environment for deploying the app into the web
 
 ## Results
-The main findings of the code can be found live dashboard available [here](https://pmherpwbdashboard.herokuapp.com/).
+The final data dashboard deployed to the web is available [here](https://pmherpwbdashboard.herokuapp.com/).
 
 ## Licensing, Authors, Acknowledgements
 I must give credit to World Bank for the data. You can find the data [here](https://data.worldbank.org/indicator).
