@@ -9,6 +9,8 @@ Used extensions/frameworks:
 - bootstrap for front-end of web-app
 - requests for handling API connection
 
+The code is also deployed to the web with heroku.
+
 ## Project Motivation
 For this project, I was using World Bank Data to showcase how to connect to an API and deploy a data web-app to share key results with anyone on the web.
 
@@ -19,9 +21,10 @@ For this project, I was using World Bank Data to showcase how to connect to an A
 - \__init__.py: initializes flask from "myapp" with the specified routes
 - routes.py: specifies the url and connects back-end with front-end
 - wrangle_data.py: code responsible for cleaning data and making plots for web-app
+- a virtual environment for deploying the app into the web
 
 ## Results
-The main findings of the code can be found at the post available here. __not a working link yet!__
+The main findings of the code can be found live dashboard available [here](https://pmherpwbdashboard.herokuapp.com/).
 
 ## Licensing, Authors, Acknowledgements
 I must give credit to World Bank for the data. You can find the data [here](https://data.worldbank.org/indicator).
