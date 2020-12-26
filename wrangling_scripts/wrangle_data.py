@@ -20,8 +20,8 @@ def return_figures():
                                         url_string='http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/SP.POP.TOTL.', 
                                         format='json', 
                                         per_page='1000', 
-                                        date='1990:2020', 
-                                        title='Total Population <br> per Person 1990 to 2019', 
+                                        mrv='25', 
+                                        title='Total Population <br> per Person', 
                                         x_label='Year', 
                                         y_label='Total Population'
                                       )
@@ -32,8 +32,8 @@ def return_figures():
                                         url_string='http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/EN.ATM.CO2E.KT.',
                                         format='json',
                                         per_page='1000',
-                                        date='1990:2017',
-                                        title='CO2 emission <br> per Year 1990 to 2017',
+                                        mrv='25',
+                                        title='CO2 emission <br> per Year',
                                         x_label='Year',
                                         y_label='CO2 emission'
                                       )
@@ -44,8 +44,8 @@ def return_figures():
                                             url_string='http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/AG.LND.FRST.ZS.',
                                             format='json',
                                             per_page='1000',
-                                            date='1990:2017',
-                                            title='Forest area <br> Percent of Total Land Area 1990 to 2017',
+                                            mrv='25',
+                                            title='Forest area <br> Percent of Total Land Area',
                                             x_label='Year',
                                             y_label='Forest Area'
                                           )
@@ -56,8 +56,8 @@ def return_figures():
                                           url_string='http://api.worldbank.org/v2/country/ARB;AFR;EUU;CAN;NAC;CHN/indicator/EG.ELC.RNEW.ZS.',
                                           format='json',
                                           per_page='1000',
-                                          date='1990:2015',
-                                          title='Renewable Energy Output <br> Percent of Total Energy 1990 to 2015',
+                                          mrv='25',
+                                          title='Renewable Energy Output <br> Percent of Total Energy',
                                           x_label='Year',
                                           y_label='Renewable Energy'
                                         )

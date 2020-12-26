@@ -5,7 +5,7 @@ from collections import defaultdict
 
 
 
-def clean_plot(graph_name, layout_name, url_string, format, per_page, date, title, x_label, y_label):
+def clean_plot(graph_name, layout_name, url_string, format, per_page, mrv, title, x_label, y_label):
       """
       Cleans and plots graphs from API data of World Bank with Plotly
 
@@ -13,14 +13,14 @@ def clean_plot(graph_name, layout_name, url_string, format, per_page, date, titl
         - url_string (string): url to API data
         - format (string): type of data, xml or json
         - per_page (string): number of results per page
-        - date (string): timeframe from year to year
+        - mrv (string): most recent values (year)
         - graph_name (string): name of graph to be plotted
         - layout_name (string): name of layout for the plotted graph
       Returns:
         - graph_name
         - layout_name
       """
-      payload = {'format': format,'per_page': per_page, 'date': date}
+      payload = {'format': format,'per_page': per_page, 'mrv': mrv}
 
       r_payload = requests.get(url_string, params=payload)
 
