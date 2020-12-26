@@ -1,6 +1,4 @@
 ## Installation
-__(project is ongoing)__
-
 The code should run with no issues using Python versions 3.*.
 
 Used extensions/frameworks:
