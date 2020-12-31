@@ -19,7 +19,7 @@ For this project, I was using World Bank Data to showcase how to connect to an A
 - \__init__.py: initializes flask from "myapp" with the specified routes
 - routes.py: specifies the url and connects back-end with front-end
 - wrangle_data.py: code responsible for cleaning data and making plots for web-app
-- a virtual environment for deploying the app into the web
+- flask: a virtual environment for deploying the app into the web
 
 ## Results
 The final data dashboard deployed to the web is available [here](https://pmherpwbdashboard.herokuapp.com/).
