@@ -1,4 +1,4 @@
-## Starting November 28th, 2022, free dynos will no longer be available. This project was on a free plan.
+Starting November 28th, 2022, free dynos will no longer be available. This project was on a free plan.
 
 ## Installation
 The code should run with no issues using Python versions 3.*.
